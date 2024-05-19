@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import { Button } from '@/components/ui/button'
-import { LoginButton } from '@/components/auth/login-button'
+import { LoginButton } from '@/components/auth/button/login-button'
 
 export default function Home() {
   return (
