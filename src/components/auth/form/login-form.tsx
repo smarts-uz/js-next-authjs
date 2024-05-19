@@ -2,10 +2,12 @@
 
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { LoginSchema } from '@/schemas'
-import { CardWrapper } from '@/components/auth/card-wrapper'
+import { login } from '@/actions/login'
+import { CardWrapper } from '@/components/auth/card/card-wrapper'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -16,10 +18,15 @@ import {
   FormMessage,
   FormField
 } from '@/components/ui/form'
-import { FormError } from '@/components/auth/form-error'
-import { FormSuccess } from '@/components/auth/form-success'
+import { FormError } from '@/components/auth/form/form-error'
+import { FormSuccess } from '@/components/auth/form/form-success'
 
 export const LoginForm = () => {
+  const [success, setSuccess] = useState<string | undefined>('')
+  const [error, setError] = useState<string | undefined>('')
+
+  const [isPending, startTransition] = useTransition()
+
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -29,7 +36,15 @@ export const LoginForm = () => {
   })
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    console.log(values)
+    setSuccess('')
+    setError('')
+
+    startTransition(() => {
+      login(values).then(data => {
+        setSuccess(data.success)
+        setError(data.error)
+      })
+    })
   }
 
   return (
@@ -41,21 +56,22 @@ export const LoginForm = () => {
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="space-y-12 mb-4">
+          <div className="space-y-6">
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel className="inline">Email</FormLabel>
+                  <FormMessage className="inline" />
                   <FormControl>
                     <Input
                       {...field}
                       placeholder="email@example.com"
                       type="email"
+                      disabled={isPending}
                     />
                   </FormControl>
-                  <FormMessage className="absolute" />
                 </FormItem>
               )}
             />
@@ -65,20 +81,26 @@ export const LoginForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel className="inline">Password</FormLabel>
+                  <FormMessage className="inline" />
                   <FormControl>
-                    <Input {...field} placeholder="********" type="password" />
+                    <Input
+                      {...field}
+                      placeholder="********"
+                      type="password"
+                      disabled={isPending}
+                    />
                   </FormControl>
-                  <FormMessage className="absolute" />
+                  {/*<FormMessage />*/}
                 </FormItem>
               )}
             />
           </div>
 
-          <FormError message="" />
-          <FormSuccess message="" />
+          <FormSuccess message={success} />
+          <FormError message={error} />
 
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" disabled={isPending}>
             Login
           </Button>
         </form>
