@@ -19,10 +19,10 @@ import {
   FormField
 } from '@/components/ui/form'
 import { FormError } from '@/components/auth/form/form-error'
-import { FormSuccess } from '@/components/auth/form/form-success'
+// import { FormSuccess } from '@/components/auth/form/form-success'
 
 export const LoginForm = () => {
-  const [success, setSuccess] = useState<string | undefined>('')
+  // const [success, setSuccess] = useState<string | undefined>('')
   const [error, setError] = useState<string | undefined>('')
 
   const [isPending, startTransition] = useTransition()
@@ -36,13 +36,13 @@ export const LoginForm = () => {
   })
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    setSuccess('')
+    // setSuccess('')
     setError('')
 
     startTransition(() => {
       login(values).then(data => {
-        setSuccess(data.success)
-        setError(data.error)
+        // setSuccess(data.success)
+        setError(data?.error)
       })
     })
   }
@@ -96,7 +96,7 @@ export const LoginForm = () => {
             />
           </div>
 
-          <FormSuccess message={success} />
+          {/*<FormSuccess message={success} />*/}
           <FormError message={error} />
 
           <Button type="submit" className="w-full" disabled={isPending}>
