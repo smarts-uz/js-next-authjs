@@ -11,7 +11,7 @@ export const LoginSchema = z.object({
     .trim()
     .min(1, ' • is required')
     .regex(/^[a-zA-Z0-9]+$/i, ' • latin letters and numbers allowed')
-    .min(8, ' • at least 8 characters')
+  // .min(8, ' • at least 8 characters')
 })
 
 export const RegisterSchema = z.object({
