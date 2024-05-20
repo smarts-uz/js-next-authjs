@@ -28,14 +28,26 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }
   },
   callbacks: {
+    async signIn({ user, account }) {
+      // Prevent credentials sign in without email verified
+      if (account?.provider === 'credentials' && user?.id) {
+        const existingUser = await getUserById(user.id)
+
+        if (!existingUser?.emailVerified) return false
+      }
+
+      // OAuth always allowed without email verification
+      return true
+    },
     async session({ token, session }) {
       if (token.sub && session.user) {
-        session.user.id = token.sub // token.sub equals user id
+        // Token.sub equals user id
+        session.user.id = token.sub
       }
 
       if (token.role && session.user) {
-        // todo: fix types error
-        session.user.role = token.role as UserRole // extend role from token and provide to session
+        // Extending role from token and provide to current session
+        session.user.role = token.role as UserRole
       }
 
       return session
