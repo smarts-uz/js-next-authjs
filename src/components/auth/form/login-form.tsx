@@ -2,6 +2,8 @@
 
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useSearchParams } from 'next/navigation'
+
 import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -22,6 +24,12 @@ import { FormError } from '@/components/auth/form/form-error'
 // import { FormSuccess } from '@/components/auth/form/form-success'
 
 export const LoginForm = () => {
+  const searchParams = useSearchParams()
+  const errorFromParams =
+    searchParams.get('error') === 'OAuthAccountNotLinked'
+      ? 'Email already linked to another account!'
+      : ''
+
   // const [success, setSuccess] = useState<string | undefined>('')
   const [error, setError] = useState<string | undefined>('')
 
@@ -41,7 +49,7 @@ export const LoginForm = () => {
 
     startTransition(() => {
       login(values).then(data => {
-        // setSuccess(data.success)
+        // setSuccess(data?.success)
         setError(data?.error)
       })
     })
@@ -97,7 +105,7 @@ export const LoginForm = () => {
           </div>
 
           {/*<FormSuccess message={success} />*/}
-          <FormError message={error} />
+          <FormError message={error || errorFromParams} />
 
           <Button type="submit" className="w-full" disabled={isPending}>
             Sign In

@@ -33,7 +33,6 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       }
     }
 
-    // Have to do that otherwise it will not redirect to DEFAULT_LOGIN_REDIRECT
-    throw error
+    throw error // Have to do that otherwise it will not redirect to DEFAULT_LOGIN_REDIRECT
   }
 }

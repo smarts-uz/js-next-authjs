@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 interface CardHeaderProps {
-  title: string
+  title?: string
 }
 
 export const Header = ({ title }: CardHeaderProps) => {
