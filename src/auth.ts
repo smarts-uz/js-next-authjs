@@ -29,14 +29,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async signIn({ user, account }) {
-      // Prevent credentials sign in without email verified
-      if (account?.provider === 'credentials' && user?.id) {
+      // Prevent sign-in using credentials without verified email
+      if (account?.type === 'credentials' && user?.id) {
         const existingUser = await getUserById(user.id)
 
         if (!existingUser?.emailVerified) return false
       }
 
-      // OAuth always allowed without email verification
+      // OAuth sign-in always allowed without email verification
       return true
     },
     async session({ token, session }) {
@@ -47,7 +47,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
       if (token.role && session.user) {
         // Extending role from token and provide to current session
-        session.user.role = token.role as UserRole
+        return {
+          ...session,
+          user: {
+            ...session.user,
+            role: token.role
+          }
+        }
       }
 
       return session

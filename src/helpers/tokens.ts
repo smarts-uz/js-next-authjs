@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 
-import { getVerificationTokenByEmail } from '@/helpers/verification-token'
+import { getVerificationTokenByEmail } from '@/helpers/verification-tokens'
 import { prisma } from '@/lib/db'
 
 export const generateVerificationToken = async (email: string) => {
