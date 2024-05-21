@@ -1,6 +1,7 @@
 'use server'
 
 import * as z from 'zod'
+import bcrypt from 'bcryptjs'
 import { AuthError } from 'next-auth'
 
 import { LoginSchema } from '@/schemas'
@@ -27,15 +28,22 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
   // User exists but not verified email
   if (!existingUser.emailVerified) {
-    const verificationToken = await generateVerificationToken(
-      existingUser.email
-    )
-    await sendVerificationEmail(
-      verificationToken.email,
-      verificationToken.token
+    const isPasswordsMatch = await bcrypt.compare(
+      password,
+      existingUser.password
     )
 
-    return { success: 'Confirmation email sent!' }
+    if (isPasswordsMatch) {
+      const verificationToken = await generateVerificationToken(
+        existingUser.email
+      )
+      await sendVerificationEmail(
+        verificationToken.email,
+        verificationToken.token
+      )
+
+      return { success: 'Confirmation email sent!' }
+    } else return { error: 'Incorrect username or password!' }
   }
 
   try {
