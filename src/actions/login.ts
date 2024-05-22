@@ -13,10 +13,7 @@ import { DEFAULT_LOGIN_REDIRECT } from '@/routes'
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validatedFields = LoginSchema.safeParse(values)
-
-  if (!validatedFields.success) {
-    return { error: 'Incorrect email or password!' }
-  }
+  if (!validatedFields.success) return { error: 'Incorrect email or password!' }
 
   const { email, password } = validatedFields.data
   const existingUser = await getUserByEmail(email)
@@ -28,19 +25,11 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
   // User exists but not verified email
   if (!existingUser.emailVerified) {
-    const isPasswordsMatch = await bcrypt.compare(
-      password,
-      existingUser.password
-    )
+    const isPasswordsMatch = await bcrypt.compare(password, existingUser.password)
 
     if (isPasswordsMatch) {
-      const verificationToken = await generateVerificationToken(
-        existingUser.email
-      )
-      await sendVerificationEmail(
-        verificationToken.email,
-        verificationToken.token
-      )
+      const verificationToken = await generateVerificationToken(existingUser.email)
+      await sendVerificationEmail(verificationToken.email, verificationToken.token)
 
       return { success: 'Confirmation email sent!' }
     } else return { error: 'Incorrect email or password!' }
@@ -57,7 +46,6 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       switch (error.type) {
         case 'CredentialsSignin':
           return { error: 'Incorrect email or password!' }
-
         default:
           return { error: 'Something went wrong! Try again' }
       }

@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { ResetSchema } from '@/schemas'
+import { ForgotPasswordSchema } from '@/schemas'
 import { reset } from '@/actions/reset'
 import { CardWrapper } from '@/components/auth/card/card-wrapper'
 import { Button } from '@/components/ui/button'
@@ -21,20 +21,20 @@ import {
 import { FormError } from '@/components/auth/form/form-error'
 import { FormSuccess } from '@/components/auth/form/form-success'
 
-export const ResetForm = () => {
+export const ForgotPasswordForm = () => {
   const [success, setSuccess] = useState<string | undefined>('')
   const [error, setError] = useState<string | undefined>('')
 
   const [isPending, startTransition] = useTransition()
 
-  const form = useForm<z.infer<typeof ResetSchema>>({
-    resolver: zodResolver(ResetSchema),
+  const form = useForm<z.infer<typeof ForgotPasswordSchema>>({
+    resolver: zodResolver(ForgotPasswordSchema),
     defaultValues: {
       email: ''
     }
   })
 
-  const onSubmit = (values: z.infer<typeof ResetSchema>) => {
+  const onSubmit = (values: z.infer<typeof ForgotPasswordSchema>) => {
     setSuccess('')
     setError('')
 
