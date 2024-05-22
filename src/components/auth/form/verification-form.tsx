@@ -17,11 +17,6 @@ export const VerificationForm = () => {
   const token = searchParams.get('token')
 
   const getVerificationToken = useCallback(() => {
-    if (!token) {
-      setError('Missing verification token!')
-      return
-    }
-
     verification(token)
       .then(data => {
         setSuccess(data.success)

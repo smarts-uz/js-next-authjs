@@ -4,7 +4,9 @@ import { prisma } from '@/lib/db'
 import { getUserByEmail } from '@/helpers/users'
 import { getVerificationTokenByToken } from '@/helpers/verification-tokens'
 
-export const verification = async (token: string) => {
+export const verification = async (token?: string | null) => {
+  if (!token) return { error: 'Missing verification token!' }
+
   const existingToken = await getVerificationTokenByToken(token)
   if (!existingToken) return { error: 'Verification token not found!' }
 
