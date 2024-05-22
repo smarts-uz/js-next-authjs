@@ -1,10 +1,10 @@
 'use client'
 
-import * as z from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useState, useTransition } from 'react'
-import { useForm } from 'react-hook-form'
 import { useSearchParams } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { useState, useTransition } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
 
 import { ResetPasswordSchema } from '@/schemas'
 import { update } from '@/actions/update'

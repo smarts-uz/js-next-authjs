@@ -1,9 +1,9 @@
 'use client'
 
-import * as z from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
+import { useState, useTransition } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
 
 import { RegisterSchema } from '@/schemas'
 import { register } from '@/actions/register'
@@ -66,11 +66,7 @@ export const RegisterForm = () => {
                   <FormLabel className="inline">Name</FormLabel>
                   <FormMessage className="inline" />
                   <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="Your Name"
-                      disabled={isPending}
-                    />
+                    <Input {...field} placeholder="Your Name" disabled={isPending} />
                   </FormControl>
                 </FormItem>
               )}
@@ -103,12 +99,7 @@ export const RegisterForm = () => {
                   <FormLabel className="inline">Password</FormLabel>
                   <FormMessage className="inline" />
                   <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="********"
-                      type="password"
-                      disabled={isPending}
-                    />
+                    <Input {...field} placeholder="********" type="password" disabled={isPending} />
                   </FormControl>
                 </FormItem>
               )}
