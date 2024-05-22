@@ -1,8 +1,8 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
-import { BeatLoader } from 'react-spinners'
 import { useSearchParams } from 'next/navigation'
+import { BeatLoader } from 'react-spinners'
+import { useCallback, useEffect, useState } from 'react'
 
 import { verification } from '@/actions/verification'
 import { CardWrapper } from '@/components/auth/card/card-wrapper'
