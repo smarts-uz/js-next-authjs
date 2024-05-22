@@ -28,3 +28,11 @@ export const RegisterSchema = z.object({
     .min(8, ' • at least 8 characters'),
   name: z.string().min(1, ' • required').min(2, ' • at least 2 characters')
 })
+
+export const ResetSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .min(1, ' • required')
+    .email(' • must be a valid email')
+})

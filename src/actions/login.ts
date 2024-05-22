@@ -15,7 +15,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validatedFields = LoginSchema.safeParse(values)
 
   if (!validatedFields.success) {
-    return { error: 'Incorrect username or password!' }
+    return { error: 'Incorrect email or password!' }
   }
 
   const { email, password } = validatedFields.data
@@ -23,7 +23,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
   // User is not exists in database or registered using oauth providers
   if (!existingUser || !existingUser.email || !existingUser.password) {
-    return { error: 'Incorrect username or password!' }
+    return { error: 'Incorrect email or password!' }
   }
 
   // User exists but not verified email
@@ -43,7 +43,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       )
 
       return { success: 'Confirmation email sent!' }
-    } else return { error: 'Incorrect username or password!' }
+    } else return { error: 'Incorrect email or password!' }
   }
 
   try {
@@ -56,7 +56,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
-          return { error: 'Incorrect username or password!' }
+          return { error: 'Incorrect email or password!' }
 
         default:
           return { error: 'Something went wrong! Try again' }

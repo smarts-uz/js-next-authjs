@@ -1,10 +1,10 @@
 import * as React from 'react'
 
-interface EmailTemplateProps {
+interface EmailProps {
   confirmLink: string
 }
 
-export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
+export const ConfirmEmail: React.FC<Readonly<EmailProps>> = ({
   confirmLink
 }) => (
   <div>
