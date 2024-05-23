@@ -1,5 +1,7 @@
 import { Poppins } from 'next/font/google'
 
+import { Toaster } from '@/components/ui/sonner'
+
 import type { Metadata } from 'next'
 
 import './globals.css'
@@ -21,7 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={font.className}>{children}</body>
+      <body className={font.className}>
+        <Toaster />
+        {children}
+      </body>
     </html>
   )
 }

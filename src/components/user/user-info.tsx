@@ -1,7 +1,10 @@
+'use client'
+
 import { FcMultipleDevices, FcServices } from 'react-icons/fc'
 
 import { ExtendedUser } from '@/auth'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { handleClickToCopy } from '@/helpers/click-to-copy'
 
 interface UserInfoProps {
   user?: ExtendedUser
@@ -23,25 +26,37 @@ export const UserInfo = ({ user, type, label }: UserInfoProps) => {
       <CardContent className="space-y-4 px-3 pb-4">
         <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
           <p className="text-sm font-medium">ID</p>
-          <p className="truncate text-xs max-w-[200px] font-mono p-1 bg-slate-100 rounded-md">
+          <p
+            className="truncate text-xs max-w-[200px] font-mono p-1 bg-slate-100 rounded-md cursor-copy"
+            onClick={() => user?.id && handleClickToCopy(user?.id)}
+          >
             {user?.id}
           </p>
         </div>
         <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
           <p className="text-sm font-medium">Name</p>
-          <p className="truncate text-xs max-w-[200px] font-mono p-1 bg-slate-100 rounded-md">
+          <p
+            className="truncate text-xs max-w-[200px] font-mono p-1 bg-slate-100 rounded-md cursor-copy"
+            onClick={() => user?.name && handleClickToCopy(user?.name)}
+          >
             {user?.name}
           </p>
         </div>
         <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
           <p className="text-sm font-medium">Email</p>
-          <p className="truncate text-xs max-w-[200px] font-mono p-1 bg-slate-100 rounded-md">
+          <p
+            className="truncate text-xs max-w-[200px] font-mono p-1 bg-slate-100 rounded-md cursor-copy"
+            onClick={() => user?.email && handleClickToCopy(user?.email)}
+          >
             {user?.email}
           </p>
         </div>
         <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
           <p className="text-sm font-medium">Role</p>
-          <p className="truncate text-xs max-w-[200px] font-mono p-1 bg-slate-100 rounded-md">
+          <p
+            className="truncate text-xs max-w-[200px] font-mono p-1 bg-slate-100 rounded-md cursor-copy"
+            onClick={() => user?.role && handleClickToCopy(user?.role)}
+          >
             {user?.role}
           </p>
         </div>
@@ -49,7 +64,7 @@ export const UserInfo = ({ user, type, label }: UserInfoProps) => {
           <p className="text-sm font-medium">2FA</p>
           <p
             className={
-              'truncate text-xs max-w-[200px] font-mono p-1  rounded-md text-white ' +
+              'truncate text-xs max-w-[200px] font-mono py-1 px-1.5 rounded-md text-white ' +
               `${user?.isTwoFactorEnabled ? 'bg-emerald-800' : 'bg-red-800'}`
             }
           >

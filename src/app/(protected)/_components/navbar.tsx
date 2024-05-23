@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { UserButton } from '@/components/auth/button/user-button'
 
-const tabs = ['server', 'client', 'settings', 'admin']
+const tabs = ['settings', 'admin', 'server', 'client']
 
 export default function Navbar() {
   const pathname = usePathname()
