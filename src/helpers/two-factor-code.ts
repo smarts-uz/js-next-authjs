@@ -11,15 +11,3 @@ export const getTwoFactorCodeByEmail = async (email: string) => {
     return null
   }
 }
-
-export const getTwoFactorCodeByCode = async (code: string) => {
-  try {
-    const twoFactorCode = await prisma.twoFactorCode.findUnique({
-      where: { code }
-    })
-
-    return twoFactorCode
-  } catch (e) {
-    return null
-  }
-}
