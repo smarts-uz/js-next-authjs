@@ -6,8 +6,14 @@ export const LoginSchema = z.object({
     .string()
     .trim()
     .min(1, ' • required')
-    .regex(/^[a-zA-Z0-9]+$/i, ' • latin letters and numbers allowed')
-  // .min(8, ' • at least 8 characters')
+    .regex(/^[a-zA-Z0-9]+$/i, ' • latin letters and numbers allowed'),
+  code: z.optional(
+    z
+      .string()
+      .trim()
+      .min(1, ' • required')
+      .regex(/^[0-9]+$/i, ' • only numbers allowed')
+  )
 })
 
 export const RegisterSchema = z.object({

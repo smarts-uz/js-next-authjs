@@ -2,9 +2,10 @@ import NextAuth, { type DefaultSession } from 'next-auth'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { UserRole } from '@prisma/client'
 
-import { getUserById } from '@/helpers/users'
-import { prisma } from '@/lib/db'
 import authConfig from '@/auth.config'
+import { prisma } from '@/lib/db'
+import { getUserById } from '@/helpers/users'
+import { getTwoFactorConfirmationByUserId } from '@/helpers/two-factor-confirmation'
 
 declare module 'next-auth' {
   interface Session {
@@ -29,14 +30,27 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async signIn({ user, account }) {
-      // Prevent sign-in using credentials without verified email
-      if (account?.type === 'credentials' && user?.id) {
+      // OAuth sign-in always allowed without email verification
+      if (account?.type !== 'credentials') return true
+
+      if (user.id) {
         const existingUser = await getUserById(user.id)
 
+        // Prevent sign-in using credentials without verified email
         if (!existingUser?.emailVerified) return false
+
+        // Prevent sign-in using credentials without completed 2fa
+        if (existingUser.isTwoFactorEnabled) {
+          const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(existingUser.id)
+          if (!twoFactorConfirmation) return false
+
+          // Delete 2fa confirmation before each login
+          await prisma.twoFactorConfirmation.delete({
+            where: { id: twoFactorConfirmation.id }
+          })
+        }
       }
 
-      // OAuth sign-in always allowed without email verification
       return true
     },
     async session({ token, session }) {
