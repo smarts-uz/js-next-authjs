@@ -12,10 +12,15 @@ export default function Navbar() {
   const pathname = usePathname()
 
   return (
-    <nav className="bg-secondary flex items-center justify-between p-4 rounded-xl shadow-sm w-[600px]">
+    <nav className="bg-secondary flex items-center justify-between p-3 rounded-xl shadow-sm w-full sm:w-[600px]">
       <div className="flex gap-x-2">
         {tabs.map(tab => (
-          <Button asChild variant={pathname === `/${tab}` ? 'default' : 'outline'} key="tab">
+          <Button
+            asChild
+            variant={pathname === `/${tab}` ? 'default' : 'outline'}
+            key={tab}
+            className={pathname === `/${tab}` ? 'max-[450px]:hidden' : 'visible'}
+          >
             <Link href={tab} className="capitalize">
               {tab}
             </Link>
