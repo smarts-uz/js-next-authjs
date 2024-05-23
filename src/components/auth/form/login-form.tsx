@@ -43,7 +43,7 @@ export const LoginForm = () => {
     }
   })
 
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+  const handleSubmitForm = (values: z.infer<typeof LoginSchema>) => {
     setSuccess('')
     setError('')
 
@@ -71,7 +71,7 @@ export const LoginForm = () => {
       showSocials
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(handleSubmitForm)} className="space-y-6">
           <div className="space-y-6">
             {showTwoFactor && (
               <FormField
