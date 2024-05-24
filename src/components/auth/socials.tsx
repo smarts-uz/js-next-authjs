@@ -3,13 +3,17 @@
 import { signIn } from 'next-auth/react'
 import { FcGoogle } from 'react-icons/fc'
 import { FaYandexInternational, FaGithub } from 'react-icons/fa'
+import { useSearchParams } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import { DEFAULT_LOGIN_REDIRECT } from '@/routes'
 
 export const Socials = () => {
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl')
+
   const handleAuth = (provider: 'google' | 'yandex' | 'github') => {
-    signIn(provider, { callbackUrl: DEFAULT_LOGIN_REDIRECT })
+    signIn(provider, { callbackUrl: callbackUrl || DEFAULT_LOGIN_REDIRECT })
   }
 
   return (
