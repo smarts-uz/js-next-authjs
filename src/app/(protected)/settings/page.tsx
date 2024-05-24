@@ -89,64 +89,60 @@ export default function SettingsPage() {
                   </FormItem>
                 )}
               />
-              {/*{user?.isOAuth === false && (*/}
-              <>
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormMessage className="inline" />
-                      <FormControl>
-                        <Input
-                          {...field}
-                          placeholder="email@example.com"
-                          type="email"
-                          disabled={isPending}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Password</FormLabel>
-                      <FormMessage className="inline" />
-                      <FormControl>
-                        <Input
-                          {...field}
-                          placeholder="********"
-                          type="password"
-                          disabled={isPending}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="updatedPassword"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Updated Password</FormLabel>
-                      <FormMessage className="inline" />
-                      <FormControl>
-                        <Input
-                          {...field}
-                          placeholder="********"
-                          type="password"
-                          disabled={isPending}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-              </>
-              {/*)}*/}
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormMessage className="inline" />
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="email@example.com"
+                        type="email"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormMessage className="inline" />
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="********"
+                        type="password"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="updatedPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Updated Password</FormLabel>
+                    <FormMessage className="inline" />
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="********"
+                        type="password"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="role"
@@ -176,8 +172,6 @@ export default function SettingsPage() {
                   </FormItem>
                 )}
               />
-
-              {/*{user?.isOAuth === false && (*/}
               <FormField
                 control={form.control}
                 name="isTwoFactorEnabled"
@@ -198,7 +192,6 @@ export default function SettingsPage() {
                   </FormItem>
                 )}
               />
-              {/*)}*/}
             </div>
             <div className="flex items-center">
               <Button
