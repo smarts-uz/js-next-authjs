@@ -1,5 +1,8 @@
-import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
+
+import { Toaster } from '@/components/ui/sonner'
+
+import type { Metadata } from 'next'
 
 import './globals.css'
 
@@ -16,11 +19,14 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
-    <body className={ font.className }>{ children }</body>
+      <body className={font.className}>
+        <Toaster position="top-right" richColors closeButton style={{ cursor: 'pointer' }} />
+        {children}
+      </body>
     </html>
   )
 }
