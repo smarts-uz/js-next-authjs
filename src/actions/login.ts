@@ -13,17 +13,18 @@ import { getTwoFactorCodeByEmail } from '@/helpers/two-factor-code'
 import { prisma } from '@/lib/db'
 import { getTwoFactorConfirmationByUserId } from '@/helpers/two-factor-confirmation'
 import { matchPasswords } from '@/helpers/passwords'
+import { statusMessage } from '@/messages/statusMessage'
 
-export const login = async (values: z.infer<typeof LoginSchema>) => {
+export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: string | null) => {
   const validatedFields = LoginSchema.safeParse(values)
-  if (!validatedFields.success) return { error: 'Incorrect email or password!' }
+  if (!validatedFields.success) return { error: statusMessage.error.incorrectFields }
 
   const { email, password, code } = validatedFields.data
   const existingUser = await getUserByEmail(email)
 
   // User is not exist or registered using OAuth provider
   if (!existingUser || !existingUser.email || !existingUser.password) {
-    return { error: 'Incorrect email or password!' }
+    return { error: statusMessage.error.incorrectFields }
   }
 
   const isPasswordsMatch = await matchPasswords(password, existingUser?.password)
@@ -34,19 +35,19 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       const verificationToken = await generateVerificationToken(existingUser.email)
       await sendVerificationEmail(verificationToken.email, verificationToken.token)
 
-      return { success: 'Confirmation email sent!' }
-    } else return { error: 'Incorrect email or password!' }
+      return { success: statusMessage.success.confirmationEmail }
+    } else return { error: statusMessage.error.incorrectFields }
   }
 
   // User exist but not completed 2fa
   if (existingUser.isTwoFactorEnabled && existingUser.email && isPasswordsMatch) {
     if (code) {
       const twoFactorCode = await getTwoFactorCodeByEmail(existingUser.email)
-      if (!twoFactorCode) return { error: 'Two-factor code not found!' }
-      if (twoFactorCode.code !== code) return { error: 'Invalid two-factor code!' }
+      if (!twoFactorCode) return { error: statusMessage.error.codeNotFound }
+      if (twoFactorCode.code !== code) return { error: statusMessage.error.codeInvalid }
 
       const hasExpired = new Date(twoFactorCode.expires) < new Date()
-      if (hasExpired) return { error: 'Two-factor code has been expired!' }
+      if (hasExpired) return { error: statusMessage.error.codeExpired }
 
       await prisma.twoFactorCode.delete({ where: { id: twoFactorCode.id } })
 
@@ -70,15 +71,15 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     await signIn('credentials', {
       email,
       password,
-      redirectTo: DEFAULT_LOGIN_REDIRECT
+      redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT
     })
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
-          return { error: 'Incorrect email or password!' }
+          return { error: statusMessage.error.incorrectFields }
         default:
-          return { error: 'Something went wrong! Try again' }
+          return { error: statusMessage.error.unexpectedError }
       }
     }
 

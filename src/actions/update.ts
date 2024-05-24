@@ -7,24 +7,25 @@ import { ResetPasswordSchema } from '@/schemas'
 import { prisma } from '@/lib/db'
 import { getResetTokenByToken } from '@/helpers/reset-tokens'
 import { getUserByEmail } from '@/helpers/users'
+import { statusMessage } from '@/messages/statusMessage'
 
 export const update = async (
   values: z.infer<typeof ResetPasswordSchema>,
   token?: string | null
 ) => {
-  if (!token) return { error: 'Missing reset password token!' }
+  if (!token) return { error: statusMessage.error.resetTokenNotProvided }
 
   const validatedFields = ResetPasswordSchema.safeParse(values)
-  if (!validatedFields.success) return { error: 'Password is invalid!' }
+  if (!validatedFields.success) return { error: statusMessage.error.passwordInvalid }
 
   const existingToken = await getResetTokenByToken(token)
-  if (!existingToken) return { error: 'Reset password token not found!' }
+  if (!existingToken) return { error: statusMessage.error.resetTokenNotFound }
 
   const isTokenExpired = new Date(existingToken.expires) < new Date()
-  if (isTokenExpired) return { error: 'Reset password token has been expired!' }
+  if (isTokenExpired) return { error: statusMessage.error.resetTokenExpired }
 
   const existingUser = await getUserByEmail(existingToken.email)
-  if (!existingUser) return { error: 'Invalid email address provided!' }
+  if (!existingUser) return { error: statusMessage.error.emailInvalid }
 
   const { password } = validatedFields.data
   const hashedPassword = await bcrypt.hash(password, 10)
@@ -38,5 +39,5 @@ export const update = async (
     where: { id: existingToken.id }
   })
 
-  return { success: 'Password successfully updated!' }
+  return { success: statusMessage.success.passwordUpdated }
 }

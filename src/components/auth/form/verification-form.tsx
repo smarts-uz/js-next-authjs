@@ -8,6 +8,7 @@ import { verification } from '@/actions/verification'
 import { CardWrapper } from '@/components/auth/card/card-wrapper'
 import { FormError } from '@/components/auth/form/form-error'
 import { FormSuccess } from '@/components/auth/form/form-success'
+import { statusMessage } from '@/messages/statusMessage'
 
 export const VerificationForm = () => {
   const [error, setError] = useState<string | undefined>('')
@@ -23,7 +24,7 @@ export const VerificationForm = () => {
         setError(data.error)
       })
       .catch(() => {
-        setError('Something went wrong! Try again')
+        setError(statusMessage.error.unexpectedError)
       })
   }, [token])
 

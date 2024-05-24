@@ -22,13 +22,13 @@ import {
 } from '@/components/ui/form'
 import { FormError } from '@/components/auth/form/form-error'
 import { FormSuccess } from '@/components/auth/form/form-success'
+import { statusMessage } from '@/messages/statusMessage'
 
 export const LoginForm = () => {
   const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl')
   const errorFromParams =
-    searchParams.get('error') === 'OAuthAccountNotLinked'
-      ? 'Email already linked to another account!'
-      : ''
+    searchParams.get('error') === 'OAuthAccountNotLinked' ? statusMessage.error.emailLinked : ''
 
   const [showTwoFactor, setShowTwoFactor] = useState(false)
   const [success, setSuccess] = useState<string | undefined>('')
@@ -48,7 +48,7 @@ export const LoginForm = () => {
     setError('')
 
     startTransition(() => {
-      login(values)
+      login(values, callbackUrl)
         .then(data => {
           if (data?.error) {
             form.reset()
@@ -59,7 +59,7 @@ export const LoginForm = () => {
           }
           if (data?.isTwoFactorEnabled) setShowTwoFactor(true)
         })
-        .catch(() => setError('Something went wrong! Try again'))
+        .catch(() => setError(statusMessage.error.unexpectedError))
     })
   }
 

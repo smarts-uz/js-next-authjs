@@ -4,11 +4,9 @@ import { useRouter } from 'next/navigation'
 
 interface LoginButtonProps {
   children: React.ReactNode
-  method?: 'modal' | 'redirect'
-  asChild?: boolean
 }
 
-export const LoginButton = ({ children, method = 'redirect', asChild }: LoginButtonProps) => {
+export const LoginButton = ({ children }: LoginButtonProps) => {
   const router = useRouter()
 
   const handleLogin = () => {
