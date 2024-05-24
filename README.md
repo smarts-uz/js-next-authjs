@@ -2,8 +2,8 @@
 
 <p align="center">
   <a href="https://nextjs-auth-flow.vercel.app/">
-      <img src="https://raw.githubusercontent.com/evgenykulinich/nextjs-auth-flow/main/public/preview/preview.PNG" height="500">
-      <img src="https://raw.githubusercontent.com/evgenykulinich/nextjs-auth-flow/main/public/preview/preview.gif" height="500">
+      <img src="https://github.com/evgenykulinich/nextjs-auth-flow/blob/main/public/preview/preview.png" height="500">
+      <img src="https://github.com/evgenykulinich/nextjs-auth-flow/blob/main/public/preview/preview.gif" height="500">
   </a>
 </p>
 
