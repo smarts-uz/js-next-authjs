@@ -13,7 +13,7 @@ export default function Home() {
         </div>
         <p className="text-white text-lg text-center">Next.js full authentication flow</p>
         <div>
-          <LoginButton method="modal" asChild>
+          <LoginButton>
             <Button variant="outline" size="lg">
               Sign In
             </Button>
