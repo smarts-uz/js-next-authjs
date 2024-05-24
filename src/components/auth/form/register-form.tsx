@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/form'
 import { FormError } from '@/components/auth/form/form-error'
 import { FormSuccess } from '@/components/auth/form/form-success'
+import { statusMessage } from '@/messages/statusMessage'
 
 export const RegisterForm = () => {
   const [success, setSuccess] = useState<string | undefined>('')
@@ -108,6 +109,7 @@ export const RegisterForm = () => {
 
           <FormSuccess message={success} />
           <FormError message={error} />
+          <FormError message={statusMessage.error.credentialsAuth} />
 
           <Button type="submit" className="w-full" disabled={isPending}>
             Sign Up

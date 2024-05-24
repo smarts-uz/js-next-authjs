@@ -30,6 +30,7 @@ export const statusMessage = {
     verificationTokenExpired: 'Verification token has been expired!',
     oAuthWithPassword: 'Not allowed to use OAuth with password!',
     oAuthWithTwoFactor: 'OAuth already using Two-factor authentication!',
-    oAuthWithEmail: 'Now allowed to change email when using OAuth!'
+    oAuthWithEmail: 'Now allowed to change email when using OAuth!',
+    credentialsAuth: 'Unable to register with credentials. Please, use socials below!'
   }
 }
