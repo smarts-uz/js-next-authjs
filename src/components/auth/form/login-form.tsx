@@ -26,6 +26,7 @@ import { statusMessage } from '@/messages/statusMessage'
 
 export const LoginForm = () => {
   const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl')
   const errorFromParams =
     searchParams.get('error') === 'OAuthAccountNotLinked' ? statusMessage.error.emailLinked : ''
 
@@ -47,7 +48,7 @@ export const LoginForm = () => {
     setError('')
 
     startTransition(() => {
-      login(values)
+      login(values, callbackUrl)
         .then(data => {
           if (data?.error) {
             form.reset()

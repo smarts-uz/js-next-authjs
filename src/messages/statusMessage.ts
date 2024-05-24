@@ -21,11 +21,15 @@ export const statusMessage = {
     emailLinked: 'Email already linked to another account!',
     passwordInvalid: 'Invalid password provided!',
     passwordIdentical: 'Updated password same as current!',
+    newPasswordNotProvided: 'Updated password not provided!',
     resetTokenNotFound: 'Reset password token not found!',
     resetTokenNotProvided: 'Missing reset password token!',
     resetTokenExpired: 'Reset password token has been expired!',
     verificationTokenNotProvided: 'Missing verification token!',
     verificationTokenNotFound: 'Verification token not found!',
-    verificationTokenExpired: 'Verification token has been expired!'
+    verificationTokenExpired: 'Verification token has been expired!',
+    oAuthWithPassword: 'Not allowed to use OAuth with password!',
+    oAuthWithTwoFactor: 'OAuth already using Two-factor authentication!',
+    oAuthWithEmail: 'Now allowed to change email when using OAuth!'
   }
 }

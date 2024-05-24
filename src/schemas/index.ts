@@ -49,7 +49,6 @@ export const SettingsSchema = z.object({
     z
       .string()
       .trim()
-      .min(1, ' • required')
       .regex(/^[a-zA-Z0-9]+$/i, ' • use latin letters or  numbers')
       .min(8, ' • at least 8 characters')
   ),
@@ -57,7 +56,6 @@ export const SettingsSchema = z.object({
     z
       .string()
       .trim()
-      .min(1, ' • required')
       .regex(/^[a-zA-Z0-9]+$/i, ' • use latin letters or  numbers')
       .min(8, ' • at least 8 characters')
   ),

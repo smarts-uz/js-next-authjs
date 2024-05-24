@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <Toaster />
+        <Toaster position="top-right" richColors closeButton style={{ cursor: 'pointer' }} />
         {children}
       </body>
     </html>
