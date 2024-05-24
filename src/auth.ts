@@ -6,19 +6,18 @@ import authConfig from '@/auth.config'
 import { prisma } from '@/lib/db'
 import { getUserById } from '@/helpers/users'
 import { getTwoFactorConfirmationByUserId } from '@/helpers/two-factor-confirmation'
-
-declare module 'next-auth' {
-  interface Session {
-    user: {
-      role: UserRole
-      isTwoFactorEnabled: boolean
-    } & DefaultSession['user']
-  }
-}
+import { getAccountByUserID } from '@/helpers/account'
 
 export type ExtendedUser = DefaultSession['user'] & {
   role: UserRole
   isTwoFactorEnabled: boolean
+  isOAuth: boolean
+}
+
+declare module 'next-auth' {
+  interface Session {
+    user: ExtendedUser & DefaultSession['user']
+  }
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
@@ -65,14 +64,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.id = token.sub
       }
 
-      if (token.role && session.user) {
-        // Extending role from token and provide to current session
+      if (session.user) {
+        // Extending property from token and provide to current session
         return {
           ...session,
           user: {
             ...session.user,
+            name: token.name,
+            email: token.email,
             role: token.role,
-            isTwoFactorEnabled: token.isTwoFactorEnabled
+            isTwoFactorEnabled: token.isTwoFactorEnabled,
+            isOAuth: token.isOAuth
           }
         }
       }
@@ -85,8 +87,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       const existingUser = await getUserById(token.sub)
       if (!existingUser) return token
 
+      const existingAccount = await getAccountByUserID(existingUser.id)
+
+      token.name = existingUser.name
+      token.email = existingUser.email
       token.role = existingUser.role
       token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled
+      token.isOAuth = Boolean(existingAccount)
 
       return token
     }

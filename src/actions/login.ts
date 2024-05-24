@@ -20,12 +20,13 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
   const { email, password, code } = validatedFields.data
   const existingUser = await getUserByEmail(email)
-  const isPasswordsMatch = await matchPasswords(password, existingUser?.password)
 
   // User is not exist or registered using OAuth provider
   if (!existingUser || !existingUser.email || !existingUser.password) {
     return { error: 'Incorrect email or password!' }
   }
+
+  const isPasswordsMatch = await matchPasswords(password, existingUser?.password)
 
   // User exist but not verified email
   if (!existingUser.emailVerified) {

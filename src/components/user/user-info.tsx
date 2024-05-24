@@ -1,6 +1,6 @@
 'use client'
 
-import { FcMultipleDevices, FcServices } from 'react-icons/fc'
+import { FcCommandLine, FcMultipleDevices } from 'react-icons/fc'
 
 import { ExtendedUser } from '@/auth'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
@@ -17,7 +17,7 @@ export const UserInfo = ({ user, type, label }: UserInfoProps) => {
     <Card className="shadow-md w-full sm:w-[600px] px-0">
       <CardHeader className="flex flex-row items-center justify-center pt-5">
         {type === 'server' ? (
-          <FcServices className="h-7 w-7 mr-2" />
+          <FcCommandLine className="h-8 w-8 mr-2" />
         ) : (
           <FcMultipleDevices className="h-7 w-7 mr-2" />
         )}
