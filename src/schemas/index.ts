@@ -44,7 +44,7 @@ export const ResetPasswordSchema = z.object({
 export const SettingsSchema = z.object({
   name: z.optional(z.string()),
   role: z.enum([UserRole.ADMIN, UserRole.USER]),
-  email: z.optional(z.string().trim().email()),
+  email: z.optional(z.string().trim().email(' • must be a valid email')),
   password: z.optional(
     z
       .string()

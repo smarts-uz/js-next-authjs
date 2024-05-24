@@ -33,6 +33,7 @@ import {
   SelectValue
 } from '@/components/ui/select'
 import { Switch } from '@/components/ui/switch'
+import { statusMessage } from '@/messages/statusMessage'
 
 export default function SettingsPage() {
   const [isPending, startTransition] = useTransition()
@@ -63,7 +64,7 @@ export default function SettingsPage() {
           }
           if (data.error) setError(data.error)
         })
-        .catch(() => setError('Something went wrong!'))
+        .catch(() => setError(statusMessage.error.unexpectedError))
     })
   }
 

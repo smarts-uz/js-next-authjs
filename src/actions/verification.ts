@@ -3,18 +3,19 @@
 import { prisma } from '@/lib/db'
 import { getUserByEmail } from '@/helpers/users'
 import { getVerificationTokenByToken } from '@/helpers/verification-tokens'
+import { statusMessage } from '@/messages/statusMessage'
 
 export const verification = async (token?: string | null) => {
-  if (!token) return { error: 'Missing verification token!' }
+  if (!token) return { error: statusMessage.error.verificationTokenNotProvided }
 
   const existingToken = await getVerificationTokenByToken(token)
-  if (!existingToken) return { error: 'Verification token not found!' }
+  if (!existingToken) return { error: statusMessage.error.verificationTokenNotFound }
 
   const isTokenExpired = new Date(existingToken.expires) < new Date()
-  if (isTokenExpired) return { error: 'Verification token has been expired!' }
+  if (isTokenExpired) return { error: statusMessage.error.verificationTokenExpired }
 
   const existingUser = await getUserByEmail(existingToken.email)
-  if (!existingUser) return { error: 'Invalid email address provided!' }
+  if (!existingUser) return { error: statusMessage.error.emailInvalid }
 
   await prisma.user.update({
     where: { id: existingUser.id },
@@ -28,5 +29,5 @@ export const verification = async (token?: string | null) => {
     where: { id: existingToken.id }
   })
 
-  return { success: 'Email has been verified!' }
+  return { success: statusMessage.success.emailVerified }
 }
