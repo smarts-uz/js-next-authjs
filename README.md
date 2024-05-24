@@ -1,7 +1,7 @@
 # Next.js Auth Flow
 
 <p align="center">
-  <a href="https://github.com/evgenykulinich/nextjs-auth-flow">
+  <a href="https://nextjs-auth-flow.vercel.app/">
       <img src="https://raw.githubusercontent.com/evgenykulinich/nextjs-auth-flow/main/public/preview/preview.PNG" height="500">
       <img src="https://raw.githubusercontent.com/evgenykulinich/nextjs-auth-flow/main/public/preview/preview.gif" height="500">
   </a>
@@ -16,12 +16,13 @@ Built with 🤍 and based on Next.js, Auth.js, Prisma, Shadcn-UI, Tailwind CSS
 
 Check out a live demo by clicking here:
 
-🔗 [View Live](https://github.com/evgenykulinich/nextjs-auth-flow) on vercel
+🔗 [View Live](https://nextjs-auth-flow.vercel.app/) on vercel
 
 ## Status
 
-![Repo](https://img.shields.io/github/repo-size/evgenykulinich/nextjs-auth-flow?labelColor=000&color=2564c4&logo=github&logoColor=fff&style=for-the-badge)
+![Repo Size](https://img.shields.io/github/repo-size/evgenykulinich/nextjs-auth-flow?labelColor=000&color=2564c4&logo=github&logoColor=fff&style=for-the-badge)
 ![PR](https://img.shields.io/github/issues-pr-closed/evgenykulinich/nextjs-auth-flow?labelColor=000&color=2564c4&logo=github&logoColor=fff&style=for-the-badge)
+![Deployment](https://img.shields.io/github/deployments/evgenykulinich/nextjs-auth-flow/production?labelColor=000&color=2564c4&logo=github&logoColor=fff&style=for-the-badge)
 
 ## Download and Installation
 
