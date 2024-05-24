@@ -1,9 +1,9 @@
+import { Suspense } from 'react'
 import { Poppins } from 'next/font/google'
 
 import { Toaster } from '@/components/ui/sonner'
 
 import type { Metadata } from 'next'
-
 import './globals.css'
 
 const font = Poppins({
@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <Toaster position="top-right" richColors closeButton style={{ cursor: 'pointer' }} />
-        {children}
+        <Suspense>{children}</Suspense>
       </body>
     </html>
   )
