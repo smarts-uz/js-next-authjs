@@ -3,6 +3,8 @@
 <p align="center">
   <a href="https://nextjs-auth-flow.vercel.app/">
       <img src="./public/preview/preview.png" height="500">
+  </a>
+  <a href="https://nextjs-auth-flow.vercel.app/">
       <img src="./public/preview/preview.gif" height="500">
   </a>
 </p>
@@ -64,4 +66,5 @@ To view this project in development mode do the following steps:
 
 ## Bugs and Issues
 
-Have a bug or an issue with this project? [Open a new issue](https://github.com/evgenykulinich/nextjs-auth-flow/issues) here on GitHub
+Have a bug or an issue with this project? [Open a new issue](https://github.com/evgenykulinich/nextjs-auth-flow/issues)
+here on GitHub
