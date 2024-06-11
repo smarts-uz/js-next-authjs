@@ -9,7 +9,13 @@ export const Header = ({ title }: CardHeaderProps) => {
     <div className="f-wull flex flex-col gap-y-4 items-center">
       <div className="flex gap-x-3">
         <h1 className="text-3xl font-semibold">Auth</h1>
-        <Image src="/icons/lock.svg" alt="lock" width={30} height={30} />
+        <Image
+          src="/icons/lock.svg"
+          alt="lock"
+          width={0}
+          height={0}
+          style={{ width: '30px', height: '30px' }}
+        />
       </div>
       <p className="text-muted-foreground text-sm">{title}</p>
     </div>

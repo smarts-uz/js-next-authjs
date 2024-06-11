@@ -12,8 +12,15 @@ const font = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: '',
-  description: ''
+  title: {
+    default: 'Auth: Next.js authentication app',
+    template: '%s · Auth'
+  },
+  description:
+    'Next.js Auth Flow is an practical example how to use authentication using both credentials and OAuth providers like Google, Yandex and GitHub',
+  twitter: {
+    card: 'summary_large_image'
+  }
 }
 
 export default function RootLayout({
