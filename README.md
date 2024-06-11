@@ -2,10 +2,16 @@
 
 <p align="center">
   <a href="https://nextjs-auth-flow.vercel.app/">
-      <img src="./public/preview/preview.png" height="500">
+      <img src="./public/preview/preview.png" height="500" />
   </a>
   <a href="https://nextjs-auth-flow.vercel.app/">
-      <img src="./public/preview/preview.gif" height="500">
+      <img src="./public/preview/preview.gif" height="500" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://nextjs-auth-flow.vercel.app/">
+      <img src="./public/preview/lighthouse.png" width="500" />
   </a>
 </p>
 
@@ -54,15 +60,15 @@ To view this project in development mode do the following steps:
 
 ## Tech Stack
 
-![Repo](https://img.shields.io/badge/next.js-next?labelColor=000&color=000&logo=next.js&logoColor=fff&style=for-the-badge)
-![Repo](https://img.shields.io/badge/typescript-typescript?labelColor=000&color=000&logo=typescript&logoColor=fff&style=for-the-badge)
-![Repo](https://img.shields.io/badge/shadcn/ui-shadcn/ui?labelColor=000&color=000&logo=shadcnui&logoColor=fff&style=for-the-badge)
-![Repo](https://img.shields.io/badge/tailwindcss-tailwindcss?labelColor=000&color=000&logo=tailwindcss&logoColor=fff&style=for-the-badge)
-![Repo](https://img.shields.io/badge/prisma-prisma?labelColor=000&color=000&logo=prisma&logoColor=fff&style=for-the-badge)
-![Repo](https://img.shields.io/badge/eslint-eslint?labelColor=000&color=000&logo=eslint&logoColor=fff&style=for-the-badge)
-![Repo](https://img.shields.io/badge/prettier-prettier?labelColor=000&color=000&logo=prettier&logoColor=fff&style=for-the-badge)
-![Repo](https://img.shields.io/badge/resend-resend?labelColor=000&color=000&logo=resend&logoColor=fff&style=for-the-badge)
-![Repo](https://img.shields.io/badge/vercel-vercel?labelColor=000&color=000&logo=vercel&logoColor=fff&style=for-the-badge)
+![Next.js](https://img.shields.io/badge/next.js-next?labelColor=000&color=000&logo=next.js&logoColor=fff&style=for-the-badge)
+![TypeScript](https://img.shields.io/badge/typescript-typescript?labelColor=000&color=000&logo=typescript&logoColor=fff&style=for-the-badge)
+![Shadcn/ui](https://img.shields.io/badge/shadcn/ui-shadcn/ui?labelColor=000&color=000&logo=shadcnui&logoColor=fff&style=for-the-badge)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-tailwindcss?labelColor=000&color=000&logo=tailwindcss&logoColor=fff&style=for-the-badge)
+![Prisma](https://img.shields.io/badge/prisma-prisma?labelColor=000&color=000&logo=prisma&logoColor=fff&style=for-the-badge)
+![ESLint](https://img.shields.io/badge/eslint-eslint?labelColor=000&color=000&logo=eslint&logoColor=fff&style=for-the-badge)
+![Prettier](https://img.shields.io/badge/prettier-prettier?labelColor=000&color=000&logo=prettier&logoColor=fff&style=for-the-badge)
+![Resend](https://img.shields.io/badge/resend-resend?labelColor=000&color=000&logo=resend&logoColor=fff&style=for-the-badge)
+![Vercel](https://img.shields.io/badge/vercel-vercel?labelColor=000&color=000&logo=vercel&logoColor=fff&style=for-the-badge)
 
 ## Bugs and Issues
 
