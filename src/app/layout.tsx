@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { Poppins } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 
 import { Toaster } from '@/components/ui/sonner'
 
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body className={font.className}>
         <Toaster position="top-right" richColors closeButton style={{ cursor: 'pointer' }} />
         <Suspense>{children}</Suspense>
+        <Analytics />
       </body>
     </html>
   )
