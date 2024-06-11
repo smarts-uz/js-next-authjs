@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { FcKey } from 'react-icons/fc'
 import { UserRole } from '@prisma/client'
 import { toast } from 'sonner'
@@ -13,18 +14,26 @@ import { useCurrentUser } from '@/hooks/useCurrentUser'
 
 export default function AdminPage() {
   const user = useCurrentUser()
+  const [clientDisabled, setClientDisabled] = useState(false)
+  const [serverDisabled, setServerDisabled] = useState(false)
 
   const handleServerAction = () => {
+    setServerDisabled(true)
     admin().then(data => {
-      if (data.success) toast.success(data.success)
-      else toast.error(data.error)
+      if (data.success) {
+        toast.success(data.success)
+        setServerDisabled(false)
+      } else toast.error(data.error)
     })
   }
 
   const handleApiRoute = () => {
+    setClientDisabled(true)
     fetch('/api/admin').then(response => {
-      if (response.ok) toast.success('Allowed API Route!')
-      else toast.error('Forbidden API Route')
+      if (response.ok) {
+        toast.success('Allowed API Route!')
+        setClientDisabled(false)
+      } else toast.error('Forbidden API Route')
     })
   }
 
@@ -42,11 +51,15 @@ export default function AdminPage() {
           <>
             <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
               <p className="text-sm font-medium">API Client Route</p>
-              <Button onClick={handleApiRoute}>Click To Test</Button>
+              <Button onClick={handleApiRoute} disabled={clientDisabled}>
+                Click To Test
+              </Button>
             </div>
             <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
               <p className="text-sm font-medium">Server Action</p>
-              <Button onClick={handleServerAction}>Click To Test</Button>
+              <Button onClick={handleServerAction} disabled={serverDisabled}>
+                Click To Test
+              </Button>
             </div>
           </>
         )}
