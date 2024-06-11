@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { Poppins } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 
 import { Toaster } from '@/components/ui/sonner'
 
@@ -12,8 +13,31 @@ const font = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: '',
-  description: ''
+  title: {
+    default: 'Auth: Next.js authentication app',
+    template: '%s · Auth'
+  },
+  description:
+    'Next.js Auth Flow is an practical example how to use authentication using both credentials and OAuth providers like Google, Yandex and GitHub',
+  twitter: {
+    card: 'summary_large_image'
+  },
+  openGraph: {
+    title: {
+      default: 'Auth: Next.js authentication app',
+      template: '%s · Auth'
+    },
+    description:
+      'Next.js Auth Flow is an practical example how to use authentication using both credentials and OAuth providers like Google, Yandex and GitHub',
+    locale: 'en-US',
+    images: [
+      {
+        url: '/opengraph-image.png',
+        width: 1200,
+        height: 630
+      }
+    ]
+  }
 }
 
 export default function RootLayout({
@@ -26,6 +50,7 @@ export default function RootLayout({
       <body className={font.className}>
         <Toaster position="top-right" richColors closeButton style={{ cursor: 'pointer' }} />
         <Suspense>{children}</Suspense>
+        <Analytics />
       </body>
     </html>
   )
