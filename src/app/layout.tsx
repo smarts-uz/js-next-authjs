@@ -21,6 +21,22 @@ export const metadata: Metadata = {
     'Next.js Auth Flow is an practical example how to use authentication using both credentials and OAuth providers like Google, Yandex and GitHub',
   twitter: {
     card: 'summary_large_image'
+  },
+  openGraph: {
+    title: {
+      default: 'Auth: Next.js authentication app',
+      template: '%s · Auth'
+    },
+    description:
+      'Next.js Auth Flow is an practical example how to use authentication using both credentials and OAuth providers like Google, Yandex and GitHub',
+    locale: 'en-US',
+    images: [
+      {
+        url: '/opengraph-image.png',
+        width: 1200,
+        height: 630
+      }
+    ]
   }
 }
 
