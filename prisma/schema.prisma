@@ -13,23 +13,17 @@ model Account {
   type              String
   provider          String
   providerAccountId String  @map("provider_account_id")
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@map("accounts")
-}
-
-enum UserRole {
-  ADMIN
-  USER
 }
 
 model User {
@@ -39,9 +33,9 @@ model User {
   emailVerified         DateTime?              @map("email_verified")
   password              String?
   isTwoFactorEnabled    Boolean                @default(false)
-  twoFactorConfirmation TwoFactorConfirmation?
   role                  UserRole               @default(USER)
   image                 String?
+  twoFactorConfirmation TwoFactorConfirmation?
   accounts              Account[]
 
   @@map("users")
@@ -76,8 +70,11 @@ model TwoFactorCode {
 
 model TwoFactorConfirmation {
   id     String @id @default(cuid())
-  userId String
+  userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
 
-  @@unique([userId])
+enum UserRole {
+  ADMIN
+  USER
 }
