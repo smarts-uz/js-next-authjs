@@ -20,8 +20,8 @@ export default {
       clientSecret: process.env.NEXT_PUBLIC_YANDEX_SECRET
     }),
     Github({
-      clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET
+      clientId: process.env.NEXT_PUBLIC_GITHUB_ID,
+      clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET
     }),
     Credentials({
       async authorize(credentials) {
