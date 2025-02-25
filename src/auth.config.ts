@@ -12,12 +12,12 @@ import type { NextAuthConfig } from 'next-auth'
 export default {
   providers: [
     Google({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET
+      clientId: process.env.NEXT_PUBLIC_GOOGLE_ID,
+      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_SECRET
     }),
     Yandex({
-      clientId: process.env.YANDEX_CLIENT_ID,
-      clientSecret: process.env.YANDEX_CLIENT_SECRET
+      clientId: process.env.NEXT_PUBLIC_YANDEX_ID,
+      clientSecret: process.env.NEXT_PUBLIC_YANDEX_SECRET
     }),
     Github({
       clientId: process.env.GITHUB_CLIENT_ID,
@@ -40,5 +40,6 @@ export default {
         return null
       }
     })
-  ]
+  ],
+  secret: process.env.NEXT_PUBLIC_SECRET
 } satisfies NextAuthConfig
